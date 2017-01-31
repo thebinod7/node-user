@@ -1,0 +1,11 @@
+{
+    "category": [
+      {"uuid":"910F7444-E245-4ED3-8925-ABB5637B5D59", "category_name":"Mobile","category_desc":"Mobile apps"},
+      {"uuid":"910F7444-E245-4ED3-8925-ABB5637B5D58", "category_name":"Web","category_desc":"Web apps"},
+      {"uuid":"910F7444-E245-4ED3-8925-ABB5637B5D57", "category_name":"Desktop","category_desc":"Desktop apps"},
+      {"uuid":"910F7444-E245-4ED3-8925-ABB5637B5D55", "category_name":"AI","category_desc":"AI apps"},
+      {"uuid":"910F7444-E245-4ED3-8925-ABB5637B5D56", "category_name":"Misc","category_desc":"Misc apps"},
+      {"uuid":"910F7444-E245-4ED3-8925-ABB5637B5D54", "category_name":"Games","category_desc":"Mobile games"}
+    ]
+}
+
