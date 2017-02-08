@@ -1,0 +1,9 @@
+{
+  "verify": [
+    {"uuid":"u12345", "verify_code":"00000","email":"binod@gmail.com","is_verified":0},
+    {"uuid":"u12346", "verify_code":"11111","email":"john@gmail.com","is_verified":1},
+    {"uuid":"u12347", "verify_code":"88888","email":"steve@gmail.com","is_verified":0},
+    {"uuid":"u12348", "verify_code":"99999","email":"hugh@gmail.com","is_verified":0}
+  ]
+}
+

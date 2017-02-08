@@ -3,6 +3,44 @@ var express = require('express')
 
 var fs = require("fs");
 
+
+router.get('/list',function (req,res) {
+    var path = process.cwd(); /* Gets current working directory */
+    var obj = JSON.parse(fs.readFileSync(path + '\\public\\sample\\users.json', 'utf8'));
+    console.log(obj);
+    res.send(obj);
+});
+
+router.post('/add',function (req,res) {
+    var data = req.body;
+    var path = process.cwd(); /* Gets current working directory */
+    var obj = JSON.parse(fs.readFileSync(path + '\\public\\sample\\users.json', 'utf8'));
+    obj.user.push(data);
+    var string_data = JSON.stringify(obj);
+    console.log(string_data);
+    fs.writeFile(path + '\\public\\sample\\users.json',string_data, 'utf8',function (err,result) {
+        if (err) throw err;
+        console.log(result);
+        console.log('Signup Successful');
+        res.json('Signup Successful');
+    });
+});
+
+router.get('/:uuid', function (req, res) {
+    var path = process.cwd(); /* Gets current working directory */
+    console.log(req.params.uuid);
+    // First read existing users.
+    var obj = JSON.parse(fs.readFileSync(path + '\\public\\sample\\users.json', 'utf8'));
+    var user = obj.user.pull(req.params.uuid);
+    console.log( user );
+    res.end( JSON.stringify(user));
+});
+
+
+module.exports = router;
+
+/*
+
 global.users = [{
     id:1,
     name:'Binod',
@@ -85,6 +123,5 @@ router.get('/:user_id',function (req,res) {
         message:'user not found',
         error : true
     });
-});
+}); */
 
-module.exports = router;

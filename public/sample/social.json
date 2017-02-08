@@ -1,0 +1,7 @@
+{
+  "social": [
+    {"uuid":"u12345", "social_app":"fb","social_id":"s00000"},
+    {"uuid":"u12346", "social_app":"gmail","social_id":"s11111"},
+  ]
+}
+

@@ -13,9 +13,17 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use(require('./controllers'));
+app.use(require('./routes'));
 
 // ROUTES FOR OUR API
 var router = express.Router();
+
+app.use(express.static('public'));
+
+// view engine setup
+//app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
 
 //needed for unintended errors like database connection closed remotely
 process.on('uncaughtException', function (err) {
