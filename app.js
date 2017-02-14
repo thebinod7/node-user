@@ -13,8 +13,9 @@ var db = require('./model/db');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.use(require('./controllers'));
-app.use(require('./routes'));
+//app.use(require('./controllers'));
+app.use('/', require('./routes'));
+app.use('/user', require('./routes/user'));
 
 // ROUTES FOR OUR API
 var router = express.Router();
