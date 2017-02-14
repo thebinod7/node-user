@@ -6,6 +6,7 @@ var express    = require('express');        // call express
 var app        = express();                 // define our app using express
 var bodyParser = require('body-parser');
 var fs = require("fs");
+var db = require('./model/db');
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST
