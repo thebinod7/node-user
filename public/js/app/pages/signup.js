@@ -1,32 +1,37 @@
 $(document).ready(function() {
     $('#btnSignup').on("click", function () {
-        if($("#check_terms").is(':not(:checked)'))
-        {
-            $( "#msg" ).html( '<p class="text-danger">Check terms and conditions of Edushala.</p>' );
+        var fname = $('#firstName').val();
+        var lname = $('#lastName').val();
+        var email = $('#email').val();
+        var pass =  $('#password').val();
+        if(fname == '' || lname == '' || email == '' || pass == ''){
+            $( "#msg" ).html( '<p class="text-danger"><strong>All fields are required. Please enter valid data.</strong></p>' );
             return;
         }
-        var data = {
-            name: $('#full_name').val(),
-            email: $('#email').val(),
-            password: $('#password').val()
-        };
-        api.user.signup({
-            data: data,
-            success: function (data) {
-                if(data.user_uuid!=null){
-                    $( "#btnUser" ).html( '<a href="/dashboard">Dashboard</a>' );
-                    sessionMgr.set('isLoggedIn', true);
-                    sessionMgr.set('user', data);
-                    sessionMgr.makeSecure(true);
-                    location.replace('/dashboard');
+        else {
+            var data = {
+                firstName: $('#firstName').val(),
+                lastName: $('#lastName').val(),
+                email: $('#email').val(),
+                password: $('#password').val()
+            };
+            $.ajax({
+                method: 'POST',
+                data: data,
+                url: 'user/create',
+                success: function (data) {
+                    console.log(data.result.message);
+                    if(data.result._id != null){
+                        location.replace('/login');
+                    }
+                    else {
+                        $( "#msg" ).html( '<p class="text-danger"><strong>'+ data.result.message +'</strong></p>' );
+                    }
+                },
+                error: function(err) {
+                    $( "#msg" ).html( '<p class="text-danger"><strong>Oops error occured, please try again.</strong></p>' );
                 }
-                else {
-                    $( "#msg" ).html( '<p class="text-danger"><strong>Email already exists</strong></p>' );
-                }
-            },
-            error :function () {
-                $( "#msg" ).html( '<p class="text-danger"><strong>Oops error occured. Please try again!!!</strong></p>' );
-            }
-        });
+            });
+        }
     });
 });

@@ -6,20 +6,32 @@ var user = require('../model/user');
 /* Create new user */
 router.post('/create', function(req, res, next) {
   var item = {
-      name : req.body.name,
-      phone : req.body.phone,
+      firstName : req.body.firstName,
+      lastName : req.body.lastName,
       email : req.body.email,
       password : req.body.password
   };
-  var data = new user(item);
-  data.save(function (err,doc) {
-      if(err){
-          res.json({success:false})
-      }
-      else {
-          res.json({success:true,result:doc})
-      }
-  })
+    user.count({email: item.email}, function (err, count){
+        console.log(count);
+        if(count>0){
+            var response = {
+                message: "Email already exists, please try new one.",
+                email: count.email
+            };
+            res.json({success:true,result:response})
+        }
+        else {
+            var data = new user(item);
+            data.save(function (err,doc) {
+                if(err){
+                    res.json({success:false})
+                }
+                else {
+                    res.json({success:true,result:doc})
+                }
+            })
+        }
+    });
 });
 
 router.get('/list',function (req,res,next) {
@@ -41,7 +53,7 @@ router.get('/find/:id',function (req,res,next) {
         if (doc) {
             res.json({success:true,result:doc});
         } else {
-            res.send("No kitten found with that ID")
+            res.send("No user found with that ID")
         }
     });
 });
